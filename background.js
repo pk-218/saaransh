@@ -1,3 +1,3 @@
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('Legalease Lens installed.');
+  console.log('Saaransh installed.');
 });

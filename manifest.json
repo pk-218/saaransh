@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Legalease Lens",
+    "name": "Saaransh",
     "version": "1.0",
     "description": "Summarize important points from terms & conditions pages.",
     "permissions": ["activeTab", "scripting"],
