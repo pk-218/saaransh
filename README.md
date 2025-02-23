@@ -13,7 +13,6 @@
 Saaransh is a **Chrome extension** that **analyzes website privacy, security, and data policies** to help users make informed decisions before interacting with a site.  
 
 🔹 **Summarizes** lengthy Terms & Conditions and Privacy Policies  
-🔹 **Scans** for security vulnerabilities and third-party trackers  
 🔹 **Scores websites** based on Privacy, Security & Data Practices  
 🔹 **Provides insights** on how your data is used  
 
@@ -25,7 +24,6 @@ Saaransh is a **Chrome extension** that **analyzes website privacy, security, an
 ✅ **One-Click Analysis** - Get an instant summary of the website's privacy & security status  
 ✅ **Privacy Score** - Know how safe the website is before using it  
 ✅ **Expandable Summary** - Detailed insights about how your data is collected & used  
-✅ **Minimalist UI** - Clean, user-friendly design  
 
 ---
 
@@ -46,7 +44,7 @@ Saaransh is a **Chrome extension** that **analyzes website privacy, security, an
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/yourusername/saaransh.git
+   git clone https://github.com/pk-218/saaransh.git
    cd saaransh
    ```
 
@@ -87,4 +85,10 @@ Saaransh is a **Chrome extension** that **analyzes website privacy, security, an
 Want to improve Saaransh? Fork the repo and submit a PR! 💙  
 
 ---
+
+
+## Attributions
+
+- We fine-tuned Legal BERT available on HuggingFace and licensed under Creative Commons - [https://huggingface.co/nlpaueb/legal-bert-base-uncased]([url](https://huggingface.co/nlpaueb/legal-bert-base-uncased)). Thanks to [@nlpaueb](https://github.com/nlpaueb)
+
   
