@@ -17,4 +17,6 @@ Fret not, use Saaransh to get a summary and score of risk to your personal data.
 
 ![alt text](image.png)
 
+## Attributions
 
+- We fine-tuned Legal BERT available on HuggingFace and licensed under Creative Commons - [https://huggingface.co/nlpaueb/legal-bert-base-uncased]([url](https://huggingface.co/nlpaueb/legal-bert-base-uncased)). Thanks to [@nlpaueb](https://github.com/nlpaueb)
