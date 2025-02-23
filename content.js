@@ -21,7 +21,7 @@ function extractLinks() {
   return matches;
 }
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   if (request.action === "extractAndSummarize") {
     const links = extractLinks();
     chrome.runtime.sendMessage({ action: "fetchPages", data: links });
@@ -51,15 +51,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
     }
     console.log("All documents", documents);
-    chrome.runtime.sendMessage({
-      action: "getResult",
-      result: documents,
-      data: sentences,
-    });
-    // sendResponse({ result: documents });
-    // chrome.runtime.sendMessage(
-    //   { action: "summarizeDocuments", data: documents, errors: errors }
-    // );
+    chrome.runtime.sendMessage({ action: "getResult", data: sentences });
+    // chrome.runtime.sendMessage({
+    //   action: "summarizeDocuments",
+    //   data: sentences,
+    //   errors: errors,
+    // });
+    // chrome.runtime.sendMessage({
+    //   action: "getResult",
+    //   result: documents,
+    //   data: sentences,
+    // });
     return true;
   }
 });
