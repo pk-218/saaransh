@@ -1,18 +1,3 @@
-function sanitizeText(text) {
-  const bodyStart = text.indexOf("<body");
-  const bodyClose = text.indexOf("</body>", bodyStart);
-  let bodyString = text.substring(bodyStart, bodyClose + "</body>".length);
-  let scriptStart = bodyString.indexOf("<script");
-  while (scriptStart !== -1) {
-    const scriptEnd =
-      bodyString.indexOf("</script>", scriptStart) + "</script>".length;
-    bodyString =
-      bodyString.substring(0, scriptStart) + bodyString.substring(scriptEnd);
-    scriptStart = bodyString.indexOf("<script");
-  }
-  return bodyString;
-}
-
 chrome.runtime.onInstalled.addListener(() => {
   console.log("Legalease Lens installed.");
 });
@@ -32,9 +17,14 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     });
     return true;
   }
-  if (request.action === "summarizeDocuments") {
-    console.log("request.data", request.data);
-    console.log("request.errors", request.errors);
-    return true;
-  }
 });
+
+// sentences -> for each sentence create input IDs -> go over each word in vocab, if found, create an entry in inputIDs map
+// create attention mask
+// convert these to a tensor
+// pass this to model for inference
+// handle output tensor
+// probability
+// if p > 0.5 -> Risky
+// n sentences -> Sum of p / n -> overall P
+// if P > 0.5 risky or not risky
