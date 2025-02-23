@@ -31,11 +31,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const parser = new DOMParser();
     const documents = [];
     const errors = [];
+    const sentences = [];
     for (let page of request.data) {
       try {
         const document = parser.parseFromString(page, "text/html");
         if (document.querySelector("parsererror")) {
           errors.push(content.querySelector("parsererror").textContent);
+        }
+        const paragraphs = document.getElementsByTagName("p");
+        for (let i = 0; i < paragraphs.length; i++) {
+          if (paragraphs[i].innerText.includes(".")) {
+            sentences.push(paragraphs[i].innerText);
+          }
         }
         documents.push(document);
         console.log("Parsed document: ", document);
@@ -44,7 +51,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
     }
     console.log("All documents", documents);
-    chrome.runtime.sendMessage({ action: "getResult", result: documents });
+    chrome.runtime.sendMessage({
+      action: "getResult",
+      result: documents,
+      data: sentences,
+    });
     // sendResponse({ result: documents });
     // chrome.runtime.sendMessage(
     //   { action: "summarizeDocuments", data: documents, errors: errors }

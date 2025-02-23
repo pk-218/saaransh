@@ -7,6 +7,6 @@ document.getElementById("summarize-btn").addEventListener("click", () => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "getResult") {
     console.log("Received result", request.result);
-    document.getElementById("summary").innerText = request.result;
+    document.getElementById("summary").innerText = request.data;
   }
 });
