@@ -1,24 +1,4 @@
-async function fetchText(url) {
-  return new Promise((resolve) => {
-    console.log("Trying to fetch text from", url);
-    chrome.runtime.sendMessage(
-      { action: "fetchText", url: url },
-      (response) => {
-        if (response && response.success) {
-          console.log(`📄 Extracted Response from ${url}:`, response.response);
-          console.log(`📄 Extracted Text from ${url}:`, response.data);
-          resolve(response.data);
-        } else {
-          console.error(`❌ Failed to fetch ${url}:`, response.error);
-          resolve(null);
-        }
-      }
-    );
-  });
-}
-
-
-async function extractAndSummarizePolicies() {
+function extractLinks() {
   let links = [];
   let matches = [];
   const matchingWords = ["term", "policy", "privacy", "tos"];
@@ -37,30 +17,38 @@ async function extractAndSummarizePolicies() {
       }
     });
   });
-
   matches = [...new Set(matches)];
-  if (matches.length === 0) {
-    console.log("❌ No Privacy Policy or Terms links found.");
-    return;
-  }
-
-  console.log("🔍 Found Privacy Policy / Terms links:", matches);
-
-  let summaries = [];
-  for (let url of matches) {
-    const text = await fetchText(url);
-    if (text) {
-      // const summary = await summarizeText(text);
-      summaries.push({ url, summary });
-    }
-  }
-
-  chrome.runtime.sendMessage({ action: "summarizedData", data: summaries });
+  return matches;
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "extractAndSummarize") {
-    extractAndSummarizePolicies().then(() => sendResponse({ success: true }));
-    return true; // Keeps the message channel open for async response
+    const links = extractLinks();
+    chrome.runtime.sendMessage({ action: "fetchPages", data: links });
+    return true;
+  }
+  if (request.action === "parsePageAsHTML") {
+    const parser = new DOMParser();
+    const documents = [];
+    const errors = [];
+    for (let page of request.data) {
+      try {
+        const document = parser.parseFromString(page, "text/html");
+        if (document.querySelector("parsererror")) {
+          errors.push(content.querySelector("parsererror").textContent);
+        }
+        documents.push(document);
+        console.log("Parsed document: ", document);
+      } catch (e) {
+        errors.push(e);
+      }
+    }
+    console.log("All documents", documents);
+    chrome.runtime.sendMessage({ action: "getResult", result: documents });
+    // sendResponse({ result: documents });
+    // chrome.runtime.sendMessage(
+    //   { action: "summarizeDocuments", data: documents, errors: errors }
+    // );
+    return true;
   }
 });
