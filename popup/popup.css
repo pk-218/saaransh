@@ -13,8 +13,6 @@ body {
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -24,26 +22,22 @@ body {
   flex-grow: 1;
 }
 
-/* Header - Title & Subtitle */
-.header {
-  margin-bottom: 15px;
-  display: flex;
 
-}
-
+/* Saaransh - Centered */
 .title {
+  display: block;
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
 }
 
+/* Subtitle - Left Aligned Below */
 .subtitle {
+  display: block;
   text-align: left;
   font-size: 14px;
-  margin-left: 10px;
   color: #666;
+  margin-left: 10px;
 }
 
 .toggle {

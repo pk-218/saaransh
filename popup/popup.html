@@ -2,14 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>T&C Summarizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saaransh</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <h1>T&C Summary</h1>
-    <button id="summarize-btn">Summarize</button>
-    <pre id="summary"></pre>
-    <script src="../model/summarizer.js"></script>
+    <div class="header">
+      <div class="title">Saaransh</div>
+      <br />
+      <p class="subtitle">
+        Analyze website privacy, security, and data handling.
+      </p>
+    </div>
+
+    <button id="analyze-btn" class="analyze-btn">Analyze Website</button>
+
+    <div id="content-section" class="hidden">
+      <div class="score-container">
+        <div class="score-grid">
+          <div class="score-item">
+            <div class="score-value">85</div>
+            <div class="score-label">Privacy</div>
+          </div>
+          <div class="score-item">
+            <div class="score-value">72</div>
+            <div class="score-label">Security</div>
+          </div>
+          <div class="score-item">
+            <div class="score-value">90</div>
+            <div class="score-label">Data</div>
+          </div>
+          <div class="score-item">
+            <div class="score-value">82</div>
+            <div class="score-label">Overall</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="results">
+        <div class="result-item">
+          <div class="status-dot status-good"></div>
+          <div class="result-text">Privacy Policy is clearly stated</div>
+        </div>
+        <div class="result-item">
+          <div class="status-dot status-warning"></div>
+          <div class="result-text">Data collection needs review</div>
+        </div>
+        <div class="result-item">
+          <div class="status-dot status-danger"></div>
+          <div class="result-text">Third-party tracking detected</div>
+        </div>
+      </div>
+
+      <div class="summary-container">
+        <button id="toggle-summary" class="summary-toggle">Show Summary</button>
+        <div id="summary-section" class="summary-section hidden">
+          <p id="summary">Summary will appear here...</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="../ort.min.js"></script>
     <script src="popup.js"></script>
+    
   </body>
 </html>
